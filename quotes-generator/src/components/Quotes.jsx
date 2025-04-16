@@ -1,42 +1,54 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
+import "../App.css";
 import Button from "./Button";
 
 function Quotes() {
   //useState
 
-  const [quotes, setQuotes] = useState(null);
+  const [quotesList, setQuotesList] = useState({ quote: "", author: "" });
+  const [displey, setDispley] = useState([]);
 
-  const fetchQuote = () => {
-    axios
-      .get("https://dummyjson.com/quotes/random")
-      .then((result) => {
-        setQuotes(result.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setQuotesList((prev) => ({ ...prev, [name]: value }));
   };
-
-  //useEffect
-
-  useEffect(() => {
-    fetchQuote();
-  }, []);
-
-  const onGenerate = () => {
-    fetchQuote();
+  const onGenerate = (e) => {
+    e.preventDefault();
+    setDispley((prev) => [...prev, quotesList]);
+    setQuotesList({ quote: "", author: "" }); // Очистити форму
   };
-
   return (
     <div>
-      {quotes && (
-        <div>
-          <p>{quotes.quote}</p>
-          <p>{quotes.author}</p>
-        </div>
-      )}
-      <Button onClick={onGenerate} />
+      <form onSubmit={onGenerate} className="form">
+        <input
+          className="input"
+          type="text"
+          name="quote"
+          value={quotesList.quote}
+          onChange={handleChange}
+          placeholder="your quote..."
+        />
+        <input
+          className="input"
+          type="text"
+          name="author"
+          value={quotesList.author}
+          onChange={handleChange}
+          placeholder="author quote..."
+        />
+        <Button onClick={onGenerate} />
+      </form>
+
+      <ul>
+        {displey?.map((item, index) => {
+          return (
+            <li key={index}>
+              <h2>{item.quote}</h2>
+              <p>{item.author}</p>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }

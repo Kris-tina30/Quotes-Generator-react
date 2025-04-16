@@ -1,10 +1,11 @@
 import React from "react";
+import "../App.css";
 
 function Button({ onClick }) {
   return (
-    <div>
-      <button onClick={onClick}> New Quote</button>
-    </div>
+    <button className="button" type="submit" onClick={onClick}>
+      Add Quote
+    </button>
   );
 }
 
