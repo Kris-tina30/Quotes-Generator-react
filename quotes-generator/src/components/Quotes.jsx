@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "../App.css";
 import Button from "./Button";
 
 function Quotes() {
@@ -31,9 +32,9 @@ function Quotes() {
   return (
     <div>
       {quotes && (
-        <div>
-          <p>{quotes.quote}</p>
-          <p>{quotes.author}</p>
+        <div className="quores-wrap">
+          <h3 className="text">{quotes.quote}</h3>
+          <p className="text">Author: {quotes.author}</p>
         </div>
       )}
       <Button onClick={onGenerate} />

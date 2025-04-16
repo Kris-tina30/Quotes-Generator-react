@@ -1,11 +1,8 @@
 import React from "react";
+import "../App.css";
 
 function Header() {
-  return (
-    <div>
-      <h1> Quote Generator</h1>
-    </div>
-  );
+  return <h1 className="title"> Quote Generator</h1>;
 }
 
 export default Header;

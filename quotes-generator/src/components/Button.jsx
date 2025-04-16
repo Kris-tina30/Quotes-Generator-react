@@ -1,9 +1,12 @@
 import React from "react";
+import "../App.css";
 
 function Button({ onClick }) {
   return (
     <div>
-      <button onClick={onClick}> New Quote</button>
+      <button className="button" onClick={onClick}>
+        New Quote
+      </button>
     </div>
   );
 }
