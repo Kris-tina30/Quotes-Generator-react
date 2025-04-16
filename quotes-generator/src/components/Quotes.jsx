@@ -1,21 +1,18 @@
 import React, { useState } from "react";
 import "../App.css";
 import Button from "./Button";
+import { useQuoteForm } from "../hooks/useQuoteForm";
 
 function Quotes() {
-  //useState
+  //useQuoteForm hook
 
-  const [quotesList, setQuotesList] = useState({ quote: "", author: "" });
+  const { quotesList, handleChange, resetForm } = useQuoteForm();
   const [displey, setDispley] = useState([]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setQuotesList((prev) => ({ ...prev, [name]: value }));
-  };
   const onGenerate = (e) => {
     e.preventDefault();
     setDispley((prev) => [...prev, quotesList]);
-    setQuotesList({ quote: "", author: "" }); // Очистити форму
+    resetForm(); // Очистити форму
   };
   return (
     <div>
